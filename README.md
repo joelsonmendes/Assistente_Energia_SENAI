@@ -1,62 +1,31 @@
-# Assistente Energia SENAI V2 — Vercel + Supabase
+# Assistente Energia SENAI — V3 GitHub Pages + Supabase
 
-## O que esta V2 entrega
-- PWA instalável no Windows/Android/iPhone.
-- Login Google via Supabase Auth.
-- Leitura autenticada do cronograma oficial no Google Drive.
-- Importação automática do `.xlsx` sem editar a fonte.
-- PostgreSQL no Supabase com RLS por usuário.
-- Dashboard dinâmico.
-- Cursos, docentes, alertas, calendário e histórico de alterações.
-- Notas sincronizadas.
-- Consultas rápidas em linguagem natural simples.
-- Detecção de novos registros, alterações e registros removidos.
+Versão preparada para hospedagem estática no GitHub Pages, sem dependência do Vercel.
 
-## 1. Supabase
-Crie/abra o projeto e execute `supabase/migrations/001_init.sql` no SQL Editor.
+## Arquitetura
 
-Em Authentication > Providers > Google:
-1. Ative Google.
-2. Configure Client ID e Client Secret do Google Cloud.
-3. Em Google Cloud OAuth, use a callback URL indicada pelo Supabase.
-4. Adicione a URL do seu Vercel em Authentication > URL Configuration > Redirect URLs.
+GitHub Pages → Supabase Auth → Supabase Edge Function `sync-cronograma` → Google Drive → Supabase PostgreSQL.
 
-O aplicativo pede o escopo:
-`https://www.googleapis.com/auth/drive.readonly`
+## Publicação
 
-Isso permite ao usuário autenticado ler arquivos do Drive aos quais ele já tem acesso.
+Substitua os arquivos da branch `main` do repositório `joelsonmendes/Assistente_Energia_SENAI` pelos arquivos desta pasta. O GitHub Pages deve publicar a raiz da branch `main`.
 
-## 2. Vercel — Environment Variables
-Configure em Project Settings > Environment Variables:
+URL esperada: `https://joelsonmendes.github.io/Assistente_Energia_SENAI/`
 
-- `NEXT_PUBLIC_SUPABASE_URL`
-- `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-- `SUPABASE_URL`
-- `SUPABASE_SERVICE_ROLE_KEY`
-- `CRONOGRAMA_FILE_ID=1vX35JOwsYnmFEOacJNPijK3q1OLfXiZ6`
+## Supabase
 
-IMPORTANTE: `SUPABASE_SERVICE_ROLE_KEY` é segredo. Nunca coloque no frontend nem no GitHub.
+Projeto já apontado no frontend: `yeaseskoklzwtgneasfi`. A chave usada no navegador é a chave **publishable**, própria para frontend. Nenhuma chave secreta foi incluída neste pacote.
 
-## 3. Deploy
-Se o projeto já está no Vercel:
-1. Substitua os arquivos pela V2.
-2. Faça commit/push.
-3. O Vercel fará deploy.
-4. Entre com Google.
-5. Clique `Sincronizar cronograma`.
+A Edge Function `sync-cronograma` deve permanecer ativa com verificação JWT habilitada.
 
-## 4. Fluxo
-PWA -> Supabase Auth -> API Vercel -> Google Drive (read-only) -> XLSX -> Supabase PostgreSQL -> Dashboard
+## Autenticação Google
 
-## 5. Segurança
-- A planilha original não é alterada.
-- A chave service role fica somente no servidor.
-- RLS impede um usuário autenticado de ler registros de outro usuário.
-- O token Google usado para sincronizar é enviado apenas para a função serverless durante a sincronização.
+No Supabase, habilite o provedor Google e configure o OAuth. Adicione a URL do GitHub Pages como URL permitida de redirecionamento:
 
-## 6. Primeira sincronização
-No primeiro clique em `Sincronizar cronograma`, todos os registros de Energia serão cadastrados como `created`.
-Nas sincronizações seguintes, o painel registra apenas mudanças.
+`https://joelsonmendes.github.io/Assistente_Energia_SENAI/`
 
-## 7. Observação importante
-A classificação de Energia usa palavras-chave para Eletrotécnica, Energias Renováveis, Fotovoltaica, Eletricista Industrial, Instalações Elétricas, NR-10/SEP, Eficiência Energética, Biomassa e Eólica. Ajuste `ENERGY_TERMS` em `api/sync.js` se surgirem novas nomenclaturas.
+O app solicita o escopo `drive.readonly` para ler apenas o cronograma autorizado no Google Drive.
+
+## PWA
+
+Os caminhos de `manifest.webmanifest`, `app.js`, `styles.css`, `icon.svg` e `sw.js` foram corrigidos para funcionar dentro do subdiretório `/Assistente_Energia_SENAI/` do GitHub Pages.

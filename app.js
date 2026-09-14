@@ -1,12 +1,15 @@
 
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-const cfg = await fetch('/api/status').then(r=>r.json()).catch(()=>({configured:false}));
+const SUPABASE_URL = 'https://yeaseskoklzwtgneasfi.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_dIeobQdtkTY_ivChUqVFQQ_TbkcC7FI';
+const EDGE_SYNC = `${SUPABASE_URL}/functions/v1/sync-cronograma`;
+const APP_URL = 'https://joelsonmendes.github.io/Assistente_Energia_SENAI/';
+
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const toast = (m)=>{const t=$('#toast');t.textContent=m;t.classList.add('show');setTimeout(()=>t.classList.remove('show'),2400)};
-if(!cfg.configured){document.body.innerHTML='<div class="login-screen"><div class="login-card"><h1>Configuração necessária</h1><p>Adicione as variáveis do Supabase no Vercel e redeploy.</p></div></div>';throw new Error('Supabase não configurado');}
-const supabase=createClient(cfg.supabaseUrl,cfg.supabaseAnonKey);
+const supabase=createClient(SUPABASE_URL,SUPABASE_KEY);
 let session=null, courses=[], changes=[], currentMonth=new Date();
 
 async function boot(){
@@ -16,7 +19,7 @@ async function boot(){
   if(session) await loadAll();
 }
 function renderAuth(){$('#loginScreen').classList.toggle('hidden',!!session);$('#app').classList.toggle('hidden',!session);}
-$('#loginGoogle').onclick=async()=>{await supabase.auth.signInWithOAuth({provider:'google',options:{redirectTo:location.origin,scopes:'openid email profile https://www.googleapis.com/auth/drive.readonly',queryParams:{access_type:'offline',prompt:'consent'}}});};
+$('#loginGoogle').onclick=async()=>{await supabase.auth.signInWithOAuth({provider:'google',options:{redirectTo:APP_URL,scopes:'openid email profile https://www.googleapis.com/auth/drive.readonly',queryParams:{access_type:'offline',prompt:'consent'}}});};
 $('#logoutBtn').onclick=()=>supabase.auth.signOut();
 
 async function loadAll(){
@@ -37,7 +40,7 @@ $('#syncBtn').onclick=async()=>{
   if(!providerToken){toast('Entre novamente com Google para liberar leitura do Drive.');return;}
   $('#syncBtn').disabled=true;$('#syncBtn').textContent='Sincronizando...';
   try{
-    const r=await fetch('/api/sync',{method:'POST',headers:{Authorization:`Bearer ${session.access_token}`,'x-google-provider-token':providerToken}});
+    const r=await fetch(EDGE_SYNC,{method:'POST',headers:{Authorization:`Bearer ${session.access_token}`,apikey:SUPABASE_KEY,'Content-Type':'application/json','x-google-provider-token':providerToken},body:'{}'});
     const j=await r.json(); if(!r.ok)throw new Error(j.error||'Falha na sincronização');
     toast(`Sincronização concluída: ${j.energyRows} registros, ${j.changes} alteração(ões).`);
     await loadAll();
@@ -127,5 +130,5 @@ $$('.nav').forEach(b=>b.onclick=()=>{$$('.nav').forEach(x=>x.classList.remove('a
 
 $('#saveNotes').onclick=async()=>{const body=$('#notesArea').value;const {error}=await supabase.from('notes').upsert({owner_id:session.user.id,body,updated_at:new Date().toISOString()},{onConflict:'owner_id'});$('#notesState').textContent=error?error.message:'Salvo no Supabase';if(!error)setTimeout(()=>$('#notesState').textContent='',1800)};
 let deferredPrompt;window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e;$('#installBtn').hidden=false});$('#installBtn').onclick=async()=>{if(deferredPrompt){deferredPrompt.prompt();await deferredPrompt.userChoice;deferredPrompt=null;$('#installBtn').hidden=true}};
-if('serviceWorker'in navigator)navigator.serviceWorker.register('/sw.js');
+if('serviceWorker'in navigator)navigator.serviceWorker.register('./sw.js');
 boot();
