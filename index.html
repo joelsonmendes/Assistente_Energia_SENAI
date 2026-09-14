@@ -1,181 +1,109 @@
 <!doctype html>
 <html lang="pt-BR">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="theme-color" content="#0b1630" />
-  <title>Assistente Energia SENAI</title>
-  <link rel="manifest" href="manifest.webmanifest" />
-  <link rel="icon" href="icon.svg" type="image/svg+xml" />
-  <link rel="stylesheet" href="styles.css" />
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#091225">
+<title>Assistente Energia SENAI</title>
+<link rel="manifest" href="/manifest.webmanifest">
+<link rel="icon" href="/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/styles.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="logo">⚡</div>
-        <div>
-          <strong>ENERGIA HUB</strong>
-          <small>Assistente do Coordenador</small>
-        </div>
-      </div>
-
-      <nav>
-        <button class="nav-item active" data-target="home">⌂ <span>Visão Geral</span></button>
-        <button class="nav-item" data-target="courses">▦ <span>Cursos</span></button>
-        <button class="nav-item" data-target="teachers">👤 <span>Docentes</span></button>
-        <button class="nav-item" data-target="alerts">⚠ <span>Alertas</span></button>
-        <button class="nav-item" data-target="tools">⌘ <span>Ferramentas</span></button>
-        <button class="nav-item" data-target="notes">✎ <span>Notas rápidas</span></button>
-      </nav>
-
-      <div class="side-footer">
-        <span class="status-dot"></span>
-        <span>Modo local ativo</span>
-      </div>
-    </aside>
-
-    <main>
-      <header class="topbar">
-        <div>
-          <p class="eyebrow">SENAI HUB • COORDENAÇÃO DE ENERGIA</p>
-          <h1>Painel Inteligente</h1>
-        </div>
-        <button id="installBtn" class="install-btn" hidden>Instalar aplicativo</button>
-      </header>
-
-      <section class="hero">
-        <div>
-          <h2>Pesquise menos. Encontre mais rápido.</h2>
-          <p>Centralize cronogramas, cursos, docentes, alertas e consultas em um só lugar.</p>
-        </div>
-        <div class="search-wrap">
-          <input id="globalSearch" placeholder="Pesquisar curso, docente, área ou palavra-chave..." />
-          <button id="searchBtn">Pesquisar</button>
-        </div>
-      </section>
-
-      <section id="home" class="view active">
-        <div class="kpi-grid">
-          <article class="kpi"><span>Turmas em andamento</span><strong>8</strong><small>Área de Energia</small></article>
-          <article class="kpi"><span>Iniciam em 7 dias</span><strong>4</strong><small>Requer atenção</small></article>
-          <article class="kpi"><span>Sem docente</span><strong>1</strong><small>Pendência crítica</small></article>
-          <article class="kpi"><span>Alertas ativos</span><strong>5</strong><small>Datas e confirmações</small></article>
-        </div>
-
-        <div class="grid-2">
-          <article class="panel">
-            <div class="panel-head"><h3>Atenção do Coordenador</h3><span class="chip warn">Prioridades</span></div>
-            <div class="alert-list">
-              <div class="alert-item critical"><b>NR-10 SEP Comunidade 02</b><span>Início próximo e docente não informado.</span></div>
-              <div class="alert-item"><b>Instalações e Acionamentos Industriais</b><span>Nova UC do Técnico em Eletrotécnica.</span></div>
-              <div class="alert-item"><b>Implementação de Sistemas Fotovoltaicos</b><span>Verificar início, SGE e contrato.</span></div>
-            </div>
-          </article>
-
-          <article class="panel">
-            <div class="panel-head"><h3>Consultas rápidas</h3><span class="chip">1 toque</span></div>
-            <div class="quick-grid">
-              <button class="quick" data-query="cursos que começam esta semana">📅<span>Começam esta semana</span></button>
-              <button class="quick" data-query="turmas sem docente">👤<span>Sem docente</span></button>
-              <button class="quick" data-query="cursos de eletrotécnica">⚡<span>Eletrotécnica</span></button>
-              <button class="quick" data-query="cursos de fotovoltaica">☀<span>Fotovoltaica</span></button>
-              <button class="quick" data-query="nr-10 sep">🛡<span>NR-10 / SEP</span></button>
-              <button class="quick" data-query="conflitos de docente e laboratório">⚠<span>Conflitos</span></button>
-            </div>
-          </article>
-        </div>
-
-        <article class="panel">
-          <div class="panel-head"><h3>Próximas ofertas</h3><span class="chip success">Previsão</span></div>
-          <div class="cards" id="courseCards">
-            <div class="course-card" data-search="instalações sistemas elétricos prediais eletrotécnica 05/10/2026">
-              <div class="course-top"><span class="tag">PREDIAL</span><span class="status prevista">Previsto</span></div>
-              <h4>Instalações de Sistemas Elétricos Prediais</h4>
-              <p>80h • 25 vagas • 18h às 22h</p>
-              <strong>Início: 05/10/2026</strong>
-            </div>
-            <div class="course-card" data-search="instalador sistemas fotovoltaico solar 14/09/2026">
-              <div class="course-top"><span class="tag">FOTOVOLTAICA</span><span class="status conferir">Confirmar</span></div>
-              <h4>Instalador de Sistemas Fotovoltaicos</h4>
-              <p>216h • 25 vagas • 18h às 22h</p>
-              <strong>Início previsto: 14/09/2026</strong>
-            </div>
-            <div class="course-card" data-search="eletricista industrial 4.0 indústria 14/09/2026">
-              <div class="course-top"><span class="tag">INDUSTRIAL</span><span class="status conferir">Confirmar</span></div>
-              <h4>Eletricista Industrial 4.0</h4>
-              <p>240h • 25 vagas • 18h às 22h</p>
-              <strong>Início previsto: 14/09/2026</strong>
-            </div>
-          </div>
-        </article>
-      </section>
-
-      <section id="courses" class="view">
-        <article class="panel">
-          <div class="panel-head"><h3>Cursos da Área de Energia</h3><span class="chip">Filtro local</span></div>
-          <div class="table-wrap">
-            <table>
-              <thead><tr><th>Curso / UC</th><th>Período</th><th>Docente</th><th>Status</th></tr></thead>
-              <tbody id="courseTable">
-                <tr data-search="projetos elétricos industriais joelson eletrotécnica"><td>Projetos Elétricos Industriais</td><td>17/08 a 14/09</td><td>Joelson</td><td>Encerrando</td></tr>
-                <tr data-search="instalações acionamentos elétricos industriais joelson eletrotécnica"><td>Instalações e Acionamentos Elétricos Industriais</td><td>15/09 a 09/10</td><td>Joelson</td><td>Próximo</td></tr>
-                <tr data-search="implementação sistemas fotovoltaicos josué galvão renováveis"><td>Implementação de Sistemas Fotovoltaicos</td><td>16/09 a 18/11</td><td>Josué Galvão</td><td>Próximo</td></tr>
-                <tr data-search="nr10 sep comunidade 02 sem docente"><td>NR-10 SEP • Comunidade 02</td><td>16/09 a 29/09</td><td>—</td><td>Pendente</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </article>
-      </section>
-
-      <section id="teachers" class="view">
-        <div class="cards">
-          <article class="person-card"><div class="avatar">JM</div><h4>Joelson</h4><p>Téc. Eletrotécnica • Fotovoltaico</p><span class="chip">Coordenador / Docente</span></article>
-          <article class="person-card"><div class="avatar">JG</div><h4>Josué Galvão</h4><p>Fotovoltaica • Energias Renováveis</p><span class="chip success">Alocado</span></article>
-          <article class="person-card"><div class="avatar">GM</div><h4>Gabriel Moreira</h4><p>Energias Renováveis • Biomassa</p><span class="chip success">Alocado</span></article>
-          <article class="person-card"><div class="avatar">?</div><h4>Sem docente</h4><p>NR-10 SEP • Comunidade 02</p><span class="chip warn">Pendência</span></article>
-        </div>
-      </section>
-
-      <section id="alerts" class="view">
-        <article class="panel">
-          <div class="panel-head"><h3>Central de Alertas</h3><span class="chip warn">Automação</span></div>
-          <div class="alert-list">
-            <div class="alert-item critical"><b>Docente ausente</b><span>NR-10 SEP Comunidade 02.</span></div>
-            <div class="alert-item"><b>Curso iniciando</b><span>Implementação de Sistemas Fotovoltaicos.</span></div>
-            <div class="alert-item"><b>Curso encerrando</b><span>Projetos Elétricos Industriais.</span></div>
-          </div>
-        </article>
-      </section>
-
-      <section id="tools" class="view">
-        <div class="tool-grid">
-          <a class="tool-card" target="_blank" rel="noopener" href="https://docs.google.com/spreadsheets/d/1vX35JOwsYnmFEOacJNPijK3q1OLfXiZ6/edit?gid=52479465#gid=52479465">
-            <span>📊</span><h4>Cronograma 2026</h4><p>Abrir planilha oficial em modo leitura.</p>
-          </a>
-          <a class="tool-card" target="_blank" rel="noopener" href="https://calendar.google.com/">
-            <span>📅</span><h4>Google Calendar</h4><p>Agenda e compromissos.</p>
-          </a>
-          <a class="tool-card" target="_blank" rel="noopener" href="https://mail.google.com/">
-            <span>✉</span><h4>Gmail</h4><p>Buscar comunicados e anexos.</p>
-          </a>
-          <a class="tool-card" target="_blank" rel="noopener" href="https://chatgpt.com/">
-            <span>✦</span><h4>ChatGPT</h4><p>Consultas e análise assistida.</p>
-          </a>
-        </div>
-      </section>
-
-      <section id="notes" class="view">
-        <article class="panel">
-          <div class="panel-head"><h3>Notas rápidas</h3><span class="chip">Salvo no dispositivo</span></div>
-          <textarea id="notesArea" placeholder="Anote pendências, docentes, datas, decisões ou lembretes..."></textarea>
-          <div class="actions"><button id="saveNotes">Salvar notas</button><span id="saveStatus"></span></div>
-        </article>
-      </section>
-    </main>
+<div id="loginScreen" class="login-screen">
+  <div class="login-card">
+    <div class="brandmark">⚡</div>
+    <p class="eyebrow">SENAI HUB • ENERGIA</p>
+    <h1>Assistente do Coordenador</h1>
+    <p>Entre com a conta Google que possui acesso de leitura ao cronograma oficial.</p>
+    <button id="loginGoogle" class="primary">Entrar com Google</button>
+    <small>O aplicativo solicitará leitura do Google Drive para sincronizar somente o cronograma autorizado.</small>
   </div>
+</div>
 
-  <div id="toast" class="toast"></div>
-  <script src="app.js"></script>
-</body>
-</html>
+<div id="app" class="shell hidden">
+<aside>
+  <div class="brand"><div class="bolt">⚡</div><div><b>ENERGIA HUB</b><small>Assistente do Coordenador</small></div></div>
+  <nav>
+    <button class="nav active" data-view="dashboard">⌂ <span>Visão Geral</span></button>
+    <button class="nav" data-view="courses">▦ <span>Cursos</span></button>
+    <button class="nav" data-view="teachers">♟ <span>Docentes</span></button>
+    <button class="nav" data-view="calendar">▣ <span>Calendário</span></button>
+    <button class="nav" data-view="alerts">△ <span>Alertas</span></button>
+    <button class="nav" data-view="history">↻ <span>Histórico</span></button>
+    <button class="nav" data-view="tools">⌘ <span>Ferramentas</span></button>
+    <button class="nav" data-view="notes">✎ <span>Notas</span></button>
+  </nav>
+  <div class="aside-bottom">
+    <span id="onlineDot" class="dot"></span><span id="syncState">Conectado</span>
+    <button id="logoutBtn" class="ghost mini">Sair</button>
+  </div>
+</aside>
+
+<main>
+<header class="top">
+  <div><p class="eyebrow">SENAI HUB • COORDENAÇÃO DE ENERGIA</p><h1>Painel Inteligente</h1></div>
+  <div class="header-actions"><button id="syncBtn" class="primary">↻ Sincronizar cronograma</button><button id="installBtn" class="ghost" hidden>Instalar</button></div>
+</header>
+
+<section class="assistant-bar">
+  <div><h2>Pesquise menos. Encontre mais rápido.</h2><p>Dados reais do cronograma, histórico e alertas em um só lugar.</p></div>
+  <div class="ask"><input id="askInput" placeholder="Ex.: quais cursos começam nos próximos 7 dias?"><button id="askBtn">Perguntar</button></div>
+</section>
+
+<section id="assistantAnswer" class="answer hidden"></section>
+
+<section id="dashboard" class="view active">
+  <div class="kpis">
+    <article><span>Turmas em andamento</span><b id="kpiRunning">—</b><small>Área de Energia</small></article>
+    <article><span>Iniciam em 7 dias</span><b id="kpiStart7">—</b><small>Próximos compromissos</small></article>
+    <article><span>Sem docente</span><b id="kpiNoTeacher">—</b><small>Pendências</small></article>
+    <article><span>Alertas ativos</span><b id="kpiAlerts">—</b><small>Requerem atenção</small></article>
+  </div>
+  <div class="cols">
+    <article class="panel"><div class="panel-head"><h3>Atenção do Coordenador</h3><span class="badge warn">Prioridades</span></div><div id="priorityList" class="list"></div></article>
+    <article class="panel"><div class="panel-head"><h3>Consultas rápidas</h3><span class="badge">1 toque</span></div>
+      <div class="quick">
+        <button data-q="cursos que começam esta semana">📅<span>Começam esta semana</span></button>
+        <button data-q="turmas sem docente">♟<span>Sem docente</span></button>
+        <button data-q="cursos de eletrotécnica">⚡<span>Eletrotécnica</span></button>
+        <button data-q="cursos de fotovoltaica">☀<span>Fotovoltaica</span></button>
+        <button data-q="nr-10 sep">◉<span>NR-10 / SEP</span></button>
+        <button data-q="alterações recentes">△<span>Alterações</span></button>
+      </div>
+    </article>
+  </div>
+  <article class="panel"><div class="panel-head"><h3>Próximos compromissos</h3><span id="lastSync" class="badge ok">Aguardando sincronização</span></div><div id="nextCards" class="cards"></div></article>
+</section>
+
+<section id="courses" class="view">
+  <article class="panel">
+    <div class="filters"><input id="courseSearch" placeholder="Pesquisar curso, UC ou docente"><select id="areaFilter"><option value="">Todas as áreas</option><option>Eletrotécnica</option><option>Energias Renováveis</option><option>Fotovoltaica</option><option>NR-10 / SEP</option><option>Eletricista Industrial</option><option>Instalações Elétricas</option></select><select id="statusFilter"><option value="">Todos</option><option>Em andamento</option><option>Próximo</option><option>Encerrando</option><option>Pendente</option></select></div>
+    <div class="table-wrap"><table><thead><tr><th>Curso / UC</th><th>Turma</th><th>Período</th><th>Docente</th><th>SGE</th><th>Status</th></tr></thead><tbody id="coursesBody"></tbody></table></div>
+  </article>
+</section>
+
+<section id="teachers" class="view"><div id="teacherCards" class="cards"></div></section>
+
+<section id="calendar" class="view">
+  <article class="panel"><div class="panel-head"><h3>Calendário da Energia</h3><div><button id="prevMonth" class="ghost mini">‹</button><span id="monthTitle" class="month-title"></span><button id="nextMonth" class="ghost mini">›</button></div></div><div id="calendarGrid" class="calendar-grid"></div></article>
+</section>
+
+<section id="alerts" class="view"><article class="panel"><div class="panel-head"><h3>Central de Alertas</h3><span class="badge warn">Automático</span></div><div id="alertsList" class="list"></div></article></section>
+
+<section id="history" class="view"><article class="panel"><div class="panel-head"><h3>Histórico de Alterações</h3><span class="badge">Cronograma</span></div><div id="historyList" class="list"></div></article></section>
+
+<section id="tools" class="view">
+  <div class="tool-grid">
+    <a target="_blank" href="https://docs.google.com/spreadsheets/d/1vX35JOwsYnmFEOacJNPijK3q1OLfXiZ6/edit?gid=52479465#gid=52479465"><b>📊</b><h3>Cronograma 2026</h3><p>Abrir fonte oficial.</p></a>
+    <a target="_blank" href="https://calendar.google.com/"><b>📅</b><h3>Google Calendar</h3><p>Agenda institucional.</p></a>
+    <a target="_blank" href="https://mail.google.com/"><b>✉</b><h3>Gmail</h3><p>Mensagens e anexos.</p></a>
+    <a target="_blank" href="https://chatgpt.com/"><b>✦</b><h3>ChatGPT</h3><p>Análise e pesquisa.</p></a>
+  </div>
+</section>
+
+<section id="notes" class="view"><article class="panel"><h3>Notas sincronizadas</h3><textarea id="notesArea" placeholder="Pendências, decisões, docentes, observações..."></textarea><div class="row"><button id="saveNotes" class="primary">Salvar</button><span id="notesState"></span></div></article></section>
+</main>
+</div>
+<div id="toast" class="toast"></div>
+<script type="module" src="/app.js"></script>
+</body></html>
