@@ -1,0 +1,18 @@
+{
+  "name": "Ana Energia V2.1 - Centro de Comando Inteligente",
+  "short_name": "Ana Energia",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07131f",
+  "theme_color": "#0b1f33",
+  "description": "Dashboard inteligente da Coordenação de Energia",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

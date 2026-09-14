@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#0b1f33" />
+  <meta name="description" content="Ana Energia V2.1 - Centro de Comando Inteligente" />
+  <link rel="manifest" href="./manifest.webmanifest" />
+  <link rel="icon" href="./icon.svg" type="image/svg+xml" />
+  <link rel="stylesheet" href="./styles.css" />
+  <title>Ana Energia V2.1</title>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-mark">AE</div>
+        <div>
+          <strong>Ana Energia V2.1</strong>
+          <span>Centro de Comando</span>
+        </div>
+      </div>
+
+      <nav>
+        <button class="nav-item active" data-view="home">⌂ <span>Visão geral</span></button>
+        <button class="nav-item" data-view="agenda">◷ <span>Agenda</span></button>
+        <button class="nav-item" data-view="alerts">⚠ <span>Alertas</span></button>
+        <button class="nav-item" data-view="labs">▦ <span>Laboratórios</span></button>
+        <button class="nav-item" data-view="changes">↻ <span>Mudanças</span></button>
+        <button class="nav-item" data-view="assistant">✦ <span>Ana</span></button>
+        <button class="nav-item" data-view="settings">⚙ <span>Configurações</span></button>
+      </nav>
+
+      <button id="talkAnaSide" class="talk-ana secondary">Falar com a Ana</button>
+    </aside>
+
+    <main>
+      <header class="topbar">
+        <div>
+          <p class="eyebrow">SENAI • ÁREA DE ENERGIA</p>
+          <h1 id="pageTitle">Painel do Coordenador</h1>
+        </div>
+        <div class="top-actions">
+          <span id="syncBadge" class="sync-badge idle">Nunca sincronizado</span>
+          <button id="syncBtn" class="sync-btn">Sincronizar</button>
+          <button id="notifyBtn" class="icon-btn" title="Ativar notificações">🔔</button>
+        </div>
+      </header>
+
+      <section id="view-home" class="view active">
+        <div class="hero">
+          <div>
+            <p class="eyebrow">CENTRO DE COMANDO INTELIGENTE</p>
+            <h2>Informação certa, no momento certo.</h2>
+            <p>Sincronize o cronograma oficial, acompanhe mudanças, identifique pendências e abra a Ana já com a pergunta pronta.</p>
+          </div>
+          <button id="talkAnaHero" class="talk-ana">Falar com a Ana</button>
+        </div>
+
+        <div class="kpis" id="kpis"></div>
+
+        <div class="grid-2">
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">PRIORIDADE</p>
+                <h3>Atenção do Coordenador</h3>
+              </div>
+              <button class="link-btn" data-prompt="Ana, mostre meu dashboard de hoje e destaque o que exige minha atenção como coordenador.">Perguntar à Ana</button>
+            </div>
+            <div id="attentionList" class="stack"></div>
+          </section>
+
+          <section class="panel">
+            <div class="panel-head">
+              <div>
+                <p class="eyebrow">PRÓXIMOS DIAS</p>
+                <h3>Agenda rápida</h3>
+              </div>
+              <button class="link-btn" data-view-jump="agenda">Ver agenda</button>
+            </div>
+            <div id="agendaMini" class="timeline"></div>
+          </section>
+        </div>
+
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">ATALHOS INTELIGENTES</p>
+              <h3>Perguntas frequentes</h3>
+            </div>
+          </div>
+          <div class="prompt-grid">
+            <button class="prompt-card" data-prompt="Ana, quais cursos da área de Energia estão em andamento hoje? Mostre curso, UC, início, término, docente e status."><strong>Cursos em andamento</strong><span>Turmas ativas agora</span></button>
+            <button class="prompt-card" data-prompt="Ana, quais serão as próximas turmas da área de Energia? Ordene por data de início."><strong>Próximas turmas</strong><span>Inícios e docentes</span></button>
+            <button class="prompt-card" data-prompt="Ana, existem cursos ou UCs sem docente, SGE pendente ou outra pendência na área de Energia?"><strong>Pendências</strong><span>Docente, SGE e confirmação</span></button>
+            <button class="prompt-card" data-prompt="Ana, o que mudou no cronograma oficial desde a última verificação?"><strong>Mudanças no cronograma</strong><span>Alterações recentes</span></button>
+            <button class="prompt-card" data-prompt="Ana, quais são minhas turmas e compromissos nos próximos 15 dias?"><strong>Minha agenda</strong><span>Próximos 15 dias</span></button>
+            <button class="prompt-card" data-prompt="Ana, analise conflitos de laboratório e sobreposição entre cursos da área de Energia."><strong>Laboratórios</strong><span>Conflitos e disponibilidade</span></button>
+          </div>
+        </section>
+      </section>
+
+      <section id="view-agenda" class="view">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">AGENDA INTELIGENTE</p>
+              <h3>Próximos compromissos</h3>
+            </div>
+            <button class="link-btn" data-prompt="Ana, organize minha agenda da área de Energia para os próximos 15 dias.">Atualizar com a Ana</button>
+          </div>
+          <div id="agendaFull" class="timeline large"></div>
+        </section>
+      </section>
+
+      <section id="view-alerts" class="view">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">ALERTAS AUTOMÁTICOS</p>
+              <h3>Central de alertas</h3>
+            </div>
+            <button id="testNotification" class="link-btn">Testar notificação</button>
+          </div>
+          <div class="callout">A V2 gera alertas a partir dos dados sincronizados do Supabase quando disponíveis. Se a sincronização não estiver configurada, usa os dados locais de segurança.</div>
+          <div id="alertsList" class="stack"></div>
+        </section>
+      </section>
+
+      <section id="view-labs" class="view">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">LABORATÓRIOS</p>
+              <h3>Visão operacional</h3>
+            </div>
+            <button class="link-btn" data-prompt="Ana, analise os laboratórios da área de Energia e identifique riscos de conflito, indisponibilidade e necessidades para os próximos cursos.">Analisar com a Ana</button>
+          </div>
+          <div id="labsGrid" class="labs-grid"></div>
+        </section>
+      </section>
+
+      <section id="view-changes" class="view">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">CRONOGRAMA</p>
+              <h3>Mudanças detectadas</h3>
+            </div>
+            <div class="inline-actions">
+              <a id="scheduleLink" class="link-btn" target="_blank" rel="noopener">Abrir cronograma</a>
+              <button class="link-btn" data-prompt="Ana, compare o cronograma oficial com a última situação conhecida e me diga o que mudou na área de Energia.">Comparar com a Ana</button>
+            </div>
+          </div>
+          <div id="changesList" class="stack"></div>
+        </section>
+      </section>
+
+      <section id="view-assistant" class="view">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">ANA</p>
+              <h3>Assistente rápido</h3>
+            </div>
+          </div>
+          <div class="assistant-box">
+            <textarea id="assistantPrompt" rows="5" placeholder="Ex.: Ana, quais cursos começam esta semana e quais ainda estão sem docente?"></textarea>
+            <div class="inline-actions">
+              <button id="sendToAna" class="talk-ana">Abrir com a Ana</button>
+              <button id="copySummary" class="link-btn">Copiar resumo do painel</button>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <section id="view-settings" class="view">
+        <section class="panel">
+          <div class="panel-head">
+            <div>
+              <p class="eyebrow">CONFIGURAÇÕES</p>
+              <h3>Integrações</h3>
+            </div>
+          </div>
+          <div class="settings-form">
+            <label>Link desta conversa no ChatGPT
+              <input id="chatUrl" type="url" placeholder="Cole aqui o link desta conversa do ChatGPT" />
+              <small>Os botões abrem exatamente esta conversa.</small>
+            </label>
+            <label>Link do cronograma oficial
+              <input id="scheduleUrl" type="url" />
+            </label>
+            <label>Supabase URL
+              <input id="supabaseUrl" type="url" placeholder="https://seu-projeto.supabase.co" />
+            </label>
+            <label>Supabase Publishable Key
+              <input id="supabaseKey" type="text" placeholder="sb_publishable_..." />
+              <small>Use somente a chave publicável. Nunca coloque service role aqui.</small>
+            </label>
+            <label>Nome da Edge Function
+              <input id="edgeFunction" type="text" placeholder="sync-cronograma" />
+            </label>
+            <label class="toggle-row"><span>Alertas ao abrir o aplicativo</span><input id="autoAlerts" type="checkbox" checked /></label>
+            <label class="toggle-row"><span>Sincronização automática ao abrir</span><input id="autoSync" type="checkbox" checked /></label>
+            <button id="saveSettings" class="talk-ana">Salvar configurações</button>
+          </div>
+        </section>
+      </section>
+    </main>
+  </div>
+
+  <div id="toast" class="toast"></div>
+  <script src="./seed.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>
