@@ -1,0 +1,162 @@
+{
+  "updated_at": "2026-09-15T09:16:00-05:00",
+  "source": "Cronograma de Turmas (2026).xlsx",
+  "courses": [
+    {
+      "course_name": "Técnico em Eletrotécnica",
+      "class_name": "TECELETROT007/008",
+      "uc": "Instalações e Acionamentos Elétricos Industriais",
+      "start_date": "2026-09-15",
+      "end_date": "2026-10-09",
+      "teacher": "Joelson",
+      "shift": "",
+      "status": "Em andamento",
+      "sge_status": "True",
+      "area": "Eletrotécnica"
+    },
+    {
+      "course_name": "Eletricista Industrial 4.0 - 03",
+      "class_name": "",
+      "uc": "Fundamentos da Eletricidade Industrial",
+      "start_date": "2026-09-08",
+      "end_date": "2026-09-22",
+      "teacher": "Josilene",
+      "shift": "",
+      "status": "Em andamento",
+      "sge_status": "False",
+      "area": "Eletricista Industrial 4.0"
+    },
+    {
+      "course_name": "Eletricista Industrial 4.0 - 03",
+      "class_name": "",
+      "uc": "Desenho Técnico Aplicado a Projetos Elétricos",
+      "start_date": "2026-09-23",
+      "end_date": "2026-10-06",
+      "teacher": "Josilene",
+      "shift": "",
+      "status": "Previsto",
+      "sge_status": "False",
+      "area": "Eletricista Industrial 4.0"
+    },
+    {
+      "course_name": "Técnico em Eletrotécnica - Armando Nogueira",
+      "class_name": "TECNEMELETR003",
+      "uc": "Instalação e Manutenção Elétrica Predial",
+      "start_date": "2026-08-05",
+      "end_date": "2026-09-16",
+      "teacher": "Elisson / Mayara (16/09 - 8h)",
+      "shift": "Integral",
+      "status": "Em andamento",
+      "sge_status": "True",
+      "area": "Eletrotécnica"
+    },
+    {
+      "course_name": "Técnico em Eletrotécnica - Armando Nogueira",
+      "class_name": "TECNEMELETR003",
+      "uc": "Projetos Elétricos Prediais",
+      "start_date": "2026-09-23",
+      "end_date": "2026-11-04",
+      "teacher": "Mayara",
+      "shift": "Integral",
+      "status": "Previsto",
+      "sge_status": "False",
+      "area": "Eletrotécnica"
+    },
+    {
+      "course_name": "Técnico em Eletrotécnica - Armando Nogueira",
+      "class_name": "TECNEMELETR003",
+      "uc": "Integração de Sistemas de Energias Renováveis",
+      "start_date": "2026-11-11",
+      "end_date": "2026-11-18",
+      "teacher": "Mayara",
+      "shift": "Integral",
+      "status": "Previsto",
+      "sge_status": "False",
+      "area": "Eletrotécnica"
+    },
+    {
+      "course_name": "Técnico em Eletrotécnica - Armando Nogueira",
+      "class_name": "TECNEMELETR003",
+      "uc": "Eficiência Energética",
+      "start_date": "2026-11-25",
+      "end_date": "2026-12-02",
+      "teacher": "Mayara",
+      "shift": "Integral",
+      "status": "Previsto",
+      "sge_status": "False",
+      "area": "Eletrotécnica"
+    },
+    {
+      "course_name": "NR 10-SEP (Comunidade 01)",
+      "class_name": "",
+      "uc": "NR-10 SEP",
+      "start_date": "2026-09-16",
+      "end_date": "2026-09-29",
+      "teacher": "Renê Cunha",
+      "shift": "Noite",
+      "status": "Previsto",
+      "sge_status": "False",
+      "area": "NR-10 / SEP"
+    },
+    {
+      "course_name": "NR 10 - Predial e Comunidade",
+      "class_name": "",
+      "uc": "NR-10",
+      "start_date": "2026-09-21",
+      "end_date": "2026-10-02",
+      "teacher": "",
+      "shift": "Noite",
+      "status": "Previsto",
+      "sge_status": "False",
+      "area": "NR-10"
+    },
+    {
+      "course_name": "Técnico em Sistemas de Energia Renovável",
+      "class_name": "Sebastião Pedrosa",
+      "uc": "Fundamentos de Sistemas de Geração de Energia por Biomassa",
+      "start_date": "2026-09-21",
+      "end_date": "2026-11-02",
+      "teacher": "Gabriel Moreira",
+      "shift": "",
+      "status": "Previsto",
+      "sge_status": "False",
+      "area": "Energias Renováveis"
+    },
+    {
+      "course_name": "Instalações Elétricas Prediais (FRIGOVACA)",
+      "class_name": "",
+      "uc": "Instalações Elétricas Prediais",
+      "start_date": "2026-09-08",
+      "end_date": "2026-10-05",
+      "teacher": "Cauã Lino / Escola SENAI",
+      "shift": "Tarde",
+      "status": "Em andamento",
+      "sge_status": "True",
+      "area": "Instalações Elétricas"
+    },
+    {
+      "course_name": "Instalações Elétricas Prediais (Comunidade 07)",
+      "class_name": "",
+      "uc": "Instalações Elétricas Prediais",
+      "start_date": "2026-09-08",
+      "end_date": "2026-10-05",
+      "teacher": "Gabriel Moreira",
+      "shift": "Noite",
+      "status": "Em andamento",
+      "sge_status": "True",
+      "area": "Instalações Elétricas"
+    }
+  ],
+  "changes": [
+    {
+      "title": "V3 dinâmica ativada",
+      "detail": "A interface agora lê data/energia.json e não precisa ser alterada a cada atualização do cronograma.",
+      "date": "2026-09-15"
+    },
+    {
+      "title": "Docente Mayara incluída",
+      "detail": "Incluídos módulos de Instalação e Manutenção Elétrica Predial, Projetos Elétricos Prediais, Integração de Sistemas de Energias Renováveis e Eficiência Energética.",
+      "date": "2026-09-15"
+    }
+  ]
+}
