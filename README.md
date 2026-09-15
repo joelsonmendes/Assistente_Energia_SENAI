@@ -1,36 +1,39 @@
-# Ana Energia V2.1 — GitHub Pages Ready
+# Ana Energia V3 — Dinâmica
 
-Esta versão já vem com o link padrão da conversa configurado:
+## O que muda nesta versão
+A interface não guarda mais o cronograma dentro do JavaScript.
 
-https://chatgpt.com/c/6aa80830-031c-83e9-93e9-40541a9f4158
+Ela lê:
+`data/energia.json`
 
-## Fluxo
-GitHub → GitHub Pages → instalar como PWA → botão **Falar com a Ana** abre a conversa configurada.
+Esse arquivo é atualizado automaticamente pela automação da Ana a partir do cronograma oficial e também pode ser sincronizado com o Supabase.
 
-## Publicação no GitHub Pages
-1. Extraia o ZIP.
-2. Envie todos os arquivos da pasta para a raiz do repositório.
-3. No GitHub: Settings → Pages.
-4. Em Build and deployment, use:
-   - Source: Deploy from a branch
-   - Branch: main
-   - Folder: / (root)
-5. Salve e aguarde a URL do GitHub Pages.
-6. Abra a URL publicada no Chrome ou Edge.
-7. Use a opção **Instalar aplicativo**.
+## Resultado
+Depois de publicar a V3 uma vez no GitHub Pages:
+- mudanças de datas;
+- docentes;
+- UCs;
+- novos cursos;
+- SGE;
+- inícios e encerramentos
 
-## Configurações já incluídas
-- Link padrão da conversa da Ana.
-- Supabase do projeto atual.
-- Chave publicável do Supabase.
-- Edge Function `sync-cronograma`.
-- Cronograma oficial.
-- PWA com Service Worker.
-- Agenda, alertas, laboratórios, mudanças no cronograma e atalhos rápidos.
+podem aparecer no painel sem alterar `index.html`, `app.js` ou `styles.css`.
+
+## Publicação
+Substitua os arquivos antigos do GitHub pelos arquivos desta V3, preservando a pasta `supabase/` se quiser manter o código do backend.
+
+Estrutura:
+- index.html
+- app.js
+- styles.css
+- manifest.webmanifest
+- sw.js
+- icon.svg
+- README.md
+- data/energia.json
+
+## PWA
+Abra o GitHub Pages no Edge ou Chrome e use “Instalar aplicativo”.
 
 ## Segurança
-A aplicação usa somente a chave publicável no frontend.
-Nunca coloque `service_role`, senhas ou Client Secret em arquivos do GitHub.
-
-## Observação
-A sincronização direta com Google Drive depende do token OAuth do Google. Sem esse token, a interface continua operando com dados já sincronizados no Supabase ou com o modo local de segurança.
+O JSON público contém somente dados operacionais do painel. Não publique contratos, valores, documentos pessoais, chaves ou segredos.
